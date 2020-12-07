@@ -1,0 +1,3 @@
+# Partie 1
+
+1. On construit une liste des "questions", chaque question étant constitué de la question posée, la réponse et le nombre de points attribués. Ainsi chaque question sera représentée par un triplet de deux chaînes de caractères et d'un entier (str,str,int). La liste est homogène et doit être modifiable (pour permettre le mélange par l'algorithme de Fisher-Yates) tandis que les questions sont immuables et hétérogènes (dû à l'inclusion des points). Les opérations à effectuer (mélange, sélection d'une sous-liste, parcours dans l'ordre) sont particulièrement adaptées à une liste.
