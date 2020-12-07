@@ -25,7 +25,7 @@ questions = []
 for ligne in fsource:
     try:
         q, r, p = ligne.strip().split(';')
-        questions.append([q,r,int(p)])
+        questions.append((q,r,int(p)))
     except:
         pass
 
