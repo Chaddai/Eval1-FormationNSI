@@ -1,20 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-import random as rd
-
-def mélanger(xs):
-    """
-    Paramètre xs : list La liste à mélanger sur place
-    Sortie None
-
-    >>> set(mélanger([1,2,3])) == set(1,2,3)
-    True
-    >>> len(mélanger([1,1,2,3])) == 4
-    True
-    """
-    for i in range(len(xs)-1, 0, -1):
-        j = rd.randint(0,i)
-        (xs[j], xs[i]) = (xs[i], xs[j]) 
+from eval1 import mélanger
 
 # ouverture du fichier
 fsource = open('quizz-diu-eil.txt','r')
