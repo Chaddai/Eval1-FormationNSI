@@ -10,8 +10,8 @@ import random as rd
 
 def mélanger(xs):
     """
-    Paramètre xs : list La liste à mélanger sur place
-    Sortie None
+        paramètre xs : (list) La liste à mélanger sur place
+        valeur renvoyée : aucune
 
     >>> L = [1,2,3]; mélanger(L); set(L) == set([1,2,3])
     True
@@ -24,9 +24,9 @@ def mélanger(xs):
 
 def sélectionner(n, xs):
     """
-    Paramètre n : int Le nombre d'éléments à sélectionner au hasard
-    Paramètre xs : list La liste dans laquelle les éléments sont sélectionnés
-    Sortie : list une liste de n éléments sélectionnés dans xs
+        paramètre n : (int) Le nombre d'éléments à sélectionner au hasard
+        paramètre xs : (list) La liste dans laquelle les éléments sont sélectionnés
+        valeur renvoyée : (list) une liste de n éléments sélectionnés dans xs
 
     >>> len(sélectionner(2, [1,2,3,4])) == 2
     True
@@ -40,8 +40,8 @@ def sélectionner(n, xs):
 
 def retireAccent(texte):
     """
-    Paramètre texte : str Le texte dont on veut retirer les accents
-    Sortie : str Le texte sans les accents
+        paramètre texte : (str) Le texte dont on veut retirer les accents
+        valeur renvoyée : (str) Le texte sans les accents
 
     >>> retireAccent('Éternel été, être où ça à')
     'Eternel ete, etre ou ca a'
@@ -56,8 +56,8 @@ def retireAccent(texte):
 
 def enMajuscule(texte):
     """
-    Paramètre texte : str Le texte sans accent qu'on veut mettre en majuscule
-    Sortie : str Le texte en majuscule
+        paramètre texte : (str) Le texte sans accent qu'on veut mettre en majuscule
+        valeur renvoyée : (str) Le texte en majuscule
 
     >>> enMajuscule('Ceci est un test.')
     'CECI EST UN TEST.'
@@ -71,8 +71,8 @@ def enMajuscule(texte):
 
 def retireDoublon(texte):
     """
-    Paramètre texte : str 
-    Sortie : str Le texte où les lettres identiques consécutives ont été supprimées
+        paramètre texte : (str) 
+        valeur renvoyée : (str) Le texte où les lettres identiques consécutives ont été supprimées
 
     >>> retireDoublon('passionnant')
     'pasionant'
@@ -109,8 +109,8 @@ for lettres in valeurs:
 
 def codeSoundex(mot):
     """
-    Paramètre mot : str Le mot à coder en Soundex
-    Sortie : str la version Soundex du mot
+        paramètre mot : (str) Le mot à coder en Soundex
+        valeur renvoyée : (str) la version Soundex du mot
 
     >>> codeSoundex('SEIZE')
     'S800'

@@ -10,5 +10,5 @@ Quelle est le nom de l'instruction qui permet d'associer une valeur à une varia
 Comment nomme-t-on l'emplacement de la mémoire qui porte un nom;variable;3
 Quel est l'acronyme pour désigner la mémoire interne morte d'un ordinateur;rom;3
 Comment se nomme le seul langage que comprend le processeur;assembleur;1
-Quel est l'acronyme donné aux 6 nombres en hexadéciaml identifiant un ordinateur;mac;5
+Quel est l'acronyme donné aux 6 nombres en hexadécimal identifiant un ordinateur;mac;5
 Combien de couches comporte le protocole TCP/IP (en lettres);quatre;5
