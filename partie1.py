@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from eval1 import mélanger
+from eval1 import sélectionner
 
 # ouverture du fichier
 fsource = open('quizz-diu-eil.txt','r')
@@ -17,11 +17,11 @@ for ligne in fsource:
 
 fsource.close()
 
-# Sélection aléatoire du nombre de questions souhaité
+# Sélection du nombre de questions souhaité
 nb_questions = int(input('Combien de questions souhaitez-vous ? '))
 assert nb_questions <= len(questions), "Trop de questions demandées, seules "+str(len(questions))+" sont disponibles."
-mélanger(questions)
-questions = questions[0:nb_questions]
+# Sélection aléatoire des questions
+questions = sélectionner(nb_questions, questions)
 
 score = 0
 for (question, réponse, points) in questions:
