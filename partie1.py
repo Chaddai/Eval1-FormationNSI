@@ -30,7 +30,9 @@ for (question, réponse, points) in questions:
     if rep == réponse:
         score += points
 
-print("Vous avez obtenu", score, "points sur un total possible de", sum(p for _,_,p in questions), ".")
+# calcul du score total possible par somme des points de toutes les questions
+total = sum(p for _,_,p in questions)
+print("Vous avez obtenu", score, "points sur un total possible de", total)
 
 
 
