@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 
+# -*- coding: utf-8
 """
 Ce module contient les fonctions communes
 pour réaliser l'évaluation 1 du bloc 1 comme
@@ -7,6 +7,7 @@ la fonction mélanger() et la fonction sélectionner()
 """
 
 import random as rd
+
 
 def mélanger(xs):
     """
@@ -19,8 +20,9 @@ def mélanger(xs):
     True
     """
     for i in range(len(xs)-1, 0, -1):
-        j = rd.randint(0,i)
-        (xs[j], xs[i]) = (xs[i], xs[j]) 
+        j = rd.randint(0, i)
+        (xs[j], xs[i]) = (xs[i], xs[j])
+
 
 def sélectionner(n, xs):
     """
@@ -38,6 +40,7 @@ def sélectionner(n, xs):
     mélanger(ys)
     return ys[:n]
 
+
 def retireAccent(texte):
     """
         paramètre texte : (str) Le texte dont on veut retirer les accents
@@ -54,6 +57,7 @@ def retireAccent(texte):
     # renvoyer la chaîne constituée des caractères non "combinant" du texte
     return ''.join(c for c in forme_kd if not ud.combining(c))
 
+
 def enMajuscule(texte):
     """
         paramètre texte : (str) Le texte sans accent qu'on veut mettre en majuscule
@@ -68,6 +72,7 @@ def enMajuscule(texte):
             c = chr(ord(c) + ord('A')-ord('a'))
         sortie.append(c)
     return ''.join(sortie)
+
 
 def retireDoublon(texte):
     """
@@ -91,21 +96,22 @@ def retireDoublon(texte):
 # Construction du dictionnaire des valeurs par lettre
 soundexValeurs = dict()
 valeurs = {
-    'AEHIOWY':0,
-    'BP':1,
-    'CKQ':2,
-    'DT':3,
-    'L':4,
-    'MN':5,
-    'R':6,
-    'GJ':7,
-    'XZS':8,
-    'FV':9
-    }
+    'AEHIOWY': 0,
+    'BP': 1,
+    'CKQ': 2,
+    'DT': 3,
+    'L': 4,
+    'MN': 5,
+    'R': 6,
+    'GJ': 7,
+    'XZS': 8,
+    'FV': 9
+}
 for lettres in valeurs:
     val = valeurs[lettres]
     for c in lettres:
-        soundexValeurs[c]=val
+        soundexValeurs[c] = val
+
 
 def codeSoundex(mot):
     """
