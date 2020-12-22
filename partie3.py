@@ -5,17 +5,26 @@ from eval1 import sélectionner, mélanger, codeSoundex
 # ouverture du fichier
 fsource = open('quizz-diu-eil.txt', 'r', encoding='utf-8')
 
-# lecture des lignes dans une liste de
+# lecture des lignes dans un dictionnaire de listes de
 # p-uplets (question (str), réponse (str), points (int))
+# indexées par le nombre de points rapportés et dans une
+# liste de questions
 parPoints = dict()
 toutesQuestions = []
 for ligne in fsource:
     try:
         q, r, p = ligne.strip().split(';')
+
+        # Si ce nombre de point n'a pas précédemment été rencontré, on crée une liste vide pour
+        # cette clé
         if p not in parPoints:
             parPoints[p] = []
+        
+        # On crée un p-uplet caractérisant cette question
         question = (q, r, int(p))
+        # On ajoute cette question à la liste des questions rapportant p points
         parPoints[p].append(question)
+        # Et à la liste de toutes les questions
         toutesQuestions.append(question)
     except:
         pass
