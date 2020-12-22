@@ -139,6 +139,43 @@ def codeSoundex(mot):
     return premiere + traduction[0:3]
 
 
+def soundexParMot(texte):
+    """
+        paramètre texte : (str) Un texte non vide
+        sortie : (str) Un texte où chaque mot constitué de lettres est remplacé par son code SoundEx
+
+    >>> appliquerSoundexParMot('utf-8')
+    'U390-8'
+    >>> appliquerSoundexParMot('seize, mots')
+    'S800, M380'
+    """
+    texte = enMajuscule(retireAccent(texte))
+    parties = []
+    mot = texte[0]
+    etaitLettre = mot.isalpha()
+    
+    # pour chaque caractère du texte, s'il a le même status que le caractère précédent
+    # on continue le "mot", sinon on ajoute le mot aux parties du texte et on commence
+    # un nouveau mot
+    for c in texte[1:]:
+        estLettre = c.isalpha()
+        if etaitLettre == estLettre:
+            mot += c
+        else:
+            parties.append(mot)
+            mot = c
+            etaitLettre = estLettre
+    # attention, le dernier mot n'est pas ajouté par la boucle
+    parties.append(mot)
+    
+    # pour chaque mot, s'il est constitué de lettres, on le remplace par son code SoundEx
+    for i in range(len(parties)):
+        if parties[i][0].isalpha():
+            parties[i] = codeSoundex(parties[i])
+    
+    return ''.join(parties)
+
+
 if __name__ == "__main__":
     import doctest
     doctest.testmod()

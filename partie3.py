@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from eval1 import sélectionner, mélanger, codeSoundex
+from eval1 import sélectionner, mélanger, codeSoundex, soundexParMot
 
 # ouverture du fichier
 fsource = open('quizz-diu-eil.txt', 'r', encoding='utf-8')
@@ -54,7 +54,7 @@ score = 0
 for (question, réponse, points) in questions:
     print(question)
     rep = input("Votre réponse : ")
-    if codeSoundex(rep) == codeSoundex(réponse):
+    if soundexParMot(rep) == soundexParMot(réponse):
         score += points
 
 # calcul du score total possible par somme des points de toutes les questions
