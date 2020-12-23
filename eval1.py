@@ -26,7 +26,7 @@ def mélanger(xs):
 
 def sélectionner(n, xs):
     """
-        paramètre n : (int) Le nombre d'éléments à sélectionner au hasard
+        paramètre n : (int) Le nombre d'éléments à sélectionner au hasard (sans remise)
         paramètre xs : (list) La liste dans laquelle les éléments sont sélectionnés
         valeur renvoyée : (list) une liste de n éléments sélectionnés dans xs
 
