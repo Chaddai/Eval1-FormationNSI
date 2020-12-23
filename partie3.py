@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from eval1 import sélectionner, mélanger, codeSoundex, soundexParMot
+from eval1 import sélectionner, mélanger, soundexParMot
 
 # ouverture du fichier
 fsource = open('quizz-diu-eil.txt', 'r', encoding='utf-8')
@@ -19,7 +19,7 @@ for ligne in fsource:
         # cette clé
         if p not in parPoints:
             parPoints[p] = []
-        
+
         # On crée un p-uplet caractérisant cette question
         question = (q, r, int(p))
         # On ajoute cette question à la liste des questions rapportant p points
