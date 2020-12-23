@@ -66,12 +66,12 @@ def enMajuscule(texte):
     >>> enMajuscule('Ceci est un test.')
     'CECI EST UN TEST.'
     """
-    sortie = []
+    sortie = ""
     for c in texte:
         if 'a' <= c <= 'z':
             c = chr(ord(c) + ord('A')-ord('a'))
-        sortie.append(c)
-    return ''.join(sortie)
+        sortie += c
+    return sortie
 
 
 def retireDoublon(texte):
@@ -84,13 +84,13 @@ def retireDoublon(texte):
     >>> retireDoublon('cocorico')
     'cocorico'
     """
-    sortie = [texte[0]]
+    sortie = texte[0]
     précédent = texte[0]
     for c in texte:
         if précédent != c:
-            sortie.append(c)
+            sortie += c
             précédent = c
-    return ''.join(sortie)
+    return sortie
 
 
 # Construction du dictionnaire des valeurs par lettre
@@ -125,15 +125,14 @@ def codeSoundex(mot):
     """
     mot = enMajuscule(retireAccent(mot))
     premiere = mot[0]
-    traduction = []
+    traduction = ""
     for c in mot[1:]:
         if c in soundexValeurs:
             val = soundexValeurs[c]
             if val > 0:
-                traduction.append(str(val))
+                traduction += str(val)
         else:
-            traduction.append(c)
-    traduction = ''.join(traduction)
+            traduction += c
     traduction = retireDoublon(traduction)
     traduction = traduction + '000'
     return premiere + traduction[0:3]
@@ -144,9 +143,9 @@ def soundexParMot(texte):
         paramètre texte : (str) Un texte non vide
         sortie : (str) Un texte où chaque mot constitué de lettres est remplacé par son code SoundEx
 
-    >>> appliquerSoundexParMot('utf-8')
+    >>> soundexParMot('utf-8')
     'U390-8'
-    >>> appliquerSoundexParMot('seize, mots')
+    >>> soundexParMot('seize, mots')
     'S800, M380'
     """
     texte = enMajuscule(retireAccent(texte))
