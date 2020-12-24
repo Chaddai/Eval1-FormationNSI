@@ -11,7 +11,7 @@
    
    Les opérations à effectuer (mélange, sélection d'une sous-liste, parcours dans l'ordre) sont particulièrement adaptées à un tableau.
 
-2. Voir le code python de la [partie 1](partie1.py) ainsi que les modules [tableau](tableau.py) et [chaine](chaine.py) qui contiennent des fonctions utilitaires créées précédemment dans l'année (ou rajoutées à l'occasion comme la fonction `demanderEntierEntre()`). 
+2. Voir le code python de la [partie 1](partie1.py) ainsi que les modules [tableau](tableau.py), [chaine](chaine.py) et [eval1](eval1.py) qui contiennent des fonctions utilitaires créées précédemment dans l'année (ou rajoutées à l'occasion comme la fonction `demanderEntierEntre()`). 
 
 ---
 

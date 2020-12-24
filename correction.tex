@@ -35,7 +35,11 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
-  pdfcreator={LaTeX via pandoc}}
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
 \urlstyle{same} % disable monospaced font for URLs
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
@@ -46,9 +50,22 @@
 \author{}
 \date{}
 
+\usepackage{ccicons}
+\usepackage{fancyhdr}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lfoot{\thepage}
+\rfoot{\begin{minipage}{0.5\textwidth}
+	\footnotesize Ce \href{https://github.com/Chaddai/Eval1-FormationNSI/tree/elementary}{travail} de Chaddaï Fouché est mise à disposition
+selon les termes de \href{http://creativecommons.org/licenses/by-nc/4.0/}{la licence Creative Commons Attribution -- Pas d'utilisation commerciale} \ccbync
+\end{minipage}}
+\renewcommand{\headrulewidth}{0pt}
+
 \begin{document}
 
 \maketitle
+\thispagestyle{fancy}
 
 \hypertarget{partie-1}{%
 \subsection{Partie 1}\label{partie-1}}
@@ -80,10 +97,10 @@
   parcours dans l'ordre) sont particulièrement adaptées à un tableau.
 \item
   Voir le code python de la \href{partie1.py}{partie 1} ainsi que les
-  modules \href{tableau.py}{tableau} et \href{chaine.py}{chaine} qui
-  contiennent des fonctions utilitaires créées précédemment dans l'année
-  (ou rajoutées à l'occasion comme la fonction
-  \texttt{demanderEntierEntre()}).
+  modules \href{tableau.py}{tableau}, \href{chaine.py}{chaine} et
+  \href{eval1.py}{eval1} qui contiennent des fonctions utilitaires
+  créées précédemment dans l'année (ou rajoutées à l'occasion comme la
+  fonction \texttt{demanderEntierEntre()}).
 \end{enumerate}
 
 \begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
