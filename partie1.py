@@ -19,8 +19,8 @@ fsource.close()
 
 # Sélection du nombre de questions souhaité
 nb_questions = int(input('Combien de questions souhaitez-vous ? '))
-assert(nb_questions <= len(questions),
-       f"Trop de questions demandées, seules {len(questions)} sont disponibles.")
+assert nb_questions <= len(questions),\
+       f"Trop de questions demandées, seules {len(questions)} sont disponibles."
 # Sélection aléatoire des questions
 questions = sélectionner(nb_questions, questions)
 

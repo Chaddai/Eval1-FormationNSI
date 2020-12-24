@@ -28,8 +28,8 @@ questions = []
 for p in parPoints.keys():
     # Sélection du nombre de questions souhaité
     nb_questions = int(input(f'Combien de questions à {p} points souhaitez-vous ? '))
-    assert (nb_questions <= len(parPoints[p]),
-            f"Trop de questions demandées, seules {len(parPoints[p])} sont disponibles.")
+    assert nb_questions <= len(parPoints[p]),\
+           f"Trop de questions demandées, seules {len(parPoints[p])} sont disponibles."
     # Sélection aléatoire des questions
     questions.extend(sélectionner(nb_questions, parPoints[p]))
 # mélange final pour éviter les successions de questions par points
