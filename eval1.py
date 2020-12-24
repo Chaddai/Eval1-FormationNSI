@@ -6,6 +6,25 @@ Ce module contient les fonctions spécifiques à l'évaluation 1 du bloc 1
 from chaine import sousChaine, enMajuscule, retireAccent, retireDoublon
 
 
+def importerQuestions(nomFichier):
+    """
+    Importe les questions depuis le fichier dont le nom est passé en paramètre
+    """
+    # ouverture du fichier
+    fsource = open(nomFichier, 'r', encoding='utf-8')
+
+    # lecture des lignes dans une liste de
+    # p-uplets (question (str), réponse (str), points (int))
+    questions = []
+    for ligne in fsource:
+        q, r, p = ligne.strip().split(';')
+        questions.append((q, r, int(p)))
+
+    fsource.close()
+
+    return questions
+
+
 # Construction du dictionnaire des valeurs par lettre (0 pour les lettres à supprimer)
 soundexValeurs = dict()
 valeurs = {
@@ -46,8 +65,6 @@ def codeSoundex(mot):
             # Une valeur de 0 indique qu'on doit négliger la lettre
             if val > 0:
                 traduction += str(val)
-        else:
-            traduction += c
     traduction = retireDoublon(traduction)
     traduction = traduction + '000'
     return premiere + sousChaine(traduction, 0, 3)
