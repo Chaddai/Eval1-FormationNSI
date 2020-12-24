@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from eval1 import sélectionner, mélanger, soundexParMot
+from eval1 import sélectionner, mélanger, soundexParMot, enMajuscule
 
 # ouverture du fichier
 fsource = open('quizz-diu-eil.txt', 'r', encoding='utf-8')
@@ -33,7 +33,7 @@ fsource.close()
 
 questions = []
 mode = input("Souhaitez vous sélectionner vos questions par nombre de points [O/n] ? ")
-if mode.lower() in ['n', 'no', 'non']:
+if enMajuscule(mode) in ['N', 'NO', 'NON']:
     nb_questions = int(input('Combien de questions souhaitez-vous ? '))
     assert(nb_questions <= len(toutesQuestions),
            f"Trop de questions demandées, seules {len(toutesQuestions)} sont disponibles.")
