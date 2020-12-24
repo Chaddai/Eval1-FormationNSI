@@ -1,99 +1,12 @@
 #!/usr/bin/python3
 # -*- coding: utf-8
 """
-Ce module contient les fonctions communes
-pour réaliser l'évaluation 1 du bloc 1 comme
-la fonction mélanger() et la fonction sélectionner()
+Ce module contient les fonctions spécifiques à l'évaluation 1 du bloc 1
 """
-
-import random as rd
-
-
-def mélanger(xs):
-    """
-        paramètre xs : (list) La liste à mélanger sur place
-        valeur renvoyée : aucune
-
-    >>> L = [1,2,3]; mélanger(L); set(L) == set([1,2,3])
-    True
-    >>> L = [1,1,2,3]; mélanger(L); len(L) == 4
-    True
-    """
-    for i in range(len(xs)-1, 0, -1):
-        j = rd.randint(0, i)
-        (xs[j], xs[i]) = (xs[i], xs[j])
+from chaine import sousChaine, enMajuscule, retireAccent, retireDoublon
 
 
-def sélectionner(n, xs):
-    """
-        paramètre n : (int) Le nombre d'éléments à sélectionner au hasard (sans remise)
-        paramètre xs : (list) La liste dans laquelle les éléments sont sélectionnés
-        valeur renvoyée : (list) une liste de n éléments sélectionnés dans xs
-
-    >>> len(sélectionner(2, [1,2,3,4])) == 2
-    True
-    >>> set(sélectionner(2, [1,2,3,4])).issubset(set([1,2,3,4]))
-    True
-    """
-    assert n <= len(xs), "Liste trop courte pour sélectionner "+str(n)+" éléments."
-    ys = list(xs)
-    mélanger(ys)
-    return ys[:n]
-
-
-def retireAccent(texte):
-    """
-        paramètre texte : (str) Le texte dont on veut retirer les accents
-        valeur renvoyée : (str) Le texte sans les accents
-
-    >>> retireAccent('Éternel été, être où ça à')
-    'Eternel ete, etre ou ca a'
-    >>> retireAccent("à noël mon aïeul entendit précisément la grêle fouetter la tôle près de la façade du gîte où trônait un fût. Quel capharnaüm !")
-    'a noel mon aieul entendit precisement la grele fouetter la tole pres de la facade du gite ou tronait un fut. Quel capharnaum !'
-    """
-    import unicodedata as ud
-    # mettre le texte en forme décomposée
-    forme_kd = ud.normalize('NFKD', texte)
-    # renvoyer la chaîne constituée des caractères non "combinant" du texte
-    return ''.join(c for c in forme_kd if not ud.combining(c))
-
-
-def enMajuscule(texte):
-    """
-        paramètre texte : (str) Le texte sans accent qu'on veut mettre en majuscule
-        valeur renvoyée : (str) Le texte en majuscule
-
-    >>> enMajuscule('Ceci est un test.')
-    'CECI EST UN TEST.'
-    """
-    sortie = ""
-    for c in texte:
-        if 'a' <= c <= 'z':
-            c = chr(ord(c) + ord('A')-ord('a'))
-        sortie += c
-    return sortie
-
-
-def retireDoublon(texte):
-    """
-        paramètre texte : (str) 
-        valeur renvoyée : (str) Le texte où les lettres identiques consécutives ont été supprimées
-
-    >>> retireDoublon('passionnant')
-    'pasionant'
-    >>> retireDoublon('cocorico')
-    'cocorico'
-    """
-    sortie = texte[0]
-    précédent = texte[0]
-    for c in texte:
-        if précédent != c:
-            sortie += c
-            précédent = c
-    return sortie
-
-
-# Construction du dictionnaire des valeurs par lettre
+# Construction du dictionnaire des valeurs par lettre (0 pour les lettres à supprimer)
 soundexValeurs = dict()
 valeurs = {
     'AEHIOWY': 0,
@@ -115,7 +28,8 @@ for lettres in valeurs:
 
 def codeSoundex(mot):
     """
-        paramètre mot : (str) Le mot à coder en Soundex
+    Calcule le code Soundex d'un mot (alphabétique)
+        paramètre mot : (str) Le mot à coder (ne doit contenir que des caractères alphabétiques)
         valeur renvoyée : (str) la version Soundex du mot
 
     >>> codeSoundex('SEIZE')
@@ -125,21 +39,23 @@ def codeSoundex(mot):
     """
     mot = enMajuscule(retireAccent(mot))
     premiere = mot[0]
-    traduction = ""
-    for c in mot[1:]:
+    traduction = ''
+    for c in sousChaine(mot, 1, len(mot)-1):
         if c in soundexValeurs:
             val = soundexValeurs[c]
+            # Une valeur de 0 indique qu'on doit négliger la lettre
             if val > 0:
                 traduction += str(val)
         else:
             traduction += c
     traduction = retireDoublon(traduction)
     traduction = traduction + '000'
-    return premiere + traduction[0:3]
+    return premiere + sousChaine(traduction, 0, 3)
 
 
 def soundexParMot(texte):
     """
+    Applique le codage Soundex à tous les mots (alphabétique) d'un texte
         paramètre texte : (str) Un texte non vide
         valeur renvoyée : (str) Chaque mot constitué de lettres est remplacé par son code SoundEx
 
@@ -157,7 +73,7 @@ def soundexParMot(texte):
     # pour chaque caractère du texte, s'il a le même status que le caractère précédent
     # on continue le "mot", sinon on ajoute le mot aux parties du texte et on commence
     # un nouveau mot
-    for c in texte[1:]:
+    for c in sousChaine(texte, 1, len(texte)-1):
         estLettre = c.isalpha()
         if etaitLettre == estLettre:
             mot += c
@@ -173,7 +89,12 @@ def soundexParMot(texte):
         if parties[i][0].isalpha():
             parties[i] = codeSoundex(parties[i])
 
-    return ''.join(parties)
+    # recollons les morceaux
+    sortie = ''
+    for partie in parties:
+        sortie += partie
+
+    return sortie
 
 
 if __name__ == "__main__":

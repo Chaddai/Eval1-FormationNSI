@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-from eval1 import sélectionner
+from tableau import sélectionner
+from chaine import demanderEntierEntre
+
 
 # ouverture du fichier
 fsource = open('quizz-diu-eil.txt', 'r', encoding='utf-8')
@@ -9,20 +11,17 @@ fsource = open('quizz-diu-eil.txt', 'r', encoding='utf-8')
 # p-uplets (question (str), réponse (str), points (int))
 questions = []
 for ligne in fsource:
-    try:
-        q, r, p = ligne.strip().split(';')
-        questions.append((q, r, int(p)))
-    except:
-        pass
+    q, r, p = ligne.strip().split(';')
+    questions.append((q, r, int(p)))
 
 fsource.close()
 
+
 # Sélection du nombre de questions souhaité
-nb_questions = int(input('Combien de questions souhaitez-vous ? '))
-assert nb_questions <= len(questions),\
-    f"Trop de questions demandées, seules {len(questions)} sont disponibles."
+nb_questions = demanderEntierEntre(0, len(questions), 'Combien de questions souhaitez-vous ? ')
 # Sélection aléatoire des questions
 questions = sélectionner(nb_questions, questions)
+
 
 score = 0
 for (question, réponse, points) in questions:
