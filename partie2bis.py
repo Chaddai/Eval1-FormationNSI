@@ -19,7 +19,7 @@ for ligne in fsource:
         # cette clé
         if p not in parPoints:
             parPoints[p] = []
-        
+
         # On crée un p-uplet caractérisant cette question
         question = (q, r, int(p))
         # On ajoute cette question à la liste des questions rapportant p points
@@ -36,7 +36,7 @@ mode = input("Souhaitez vous sélectionner vos questions par nombre de points [O
 if mode.lower() in ['n', 'no', 'non']:
     nb_questions = int(input('Combien de questions souhaitez-vous ? '))
     assert nb_questions <= len(toutesQuestions),\
-           f"Trop de questions demandées, seules {len(toutesQuestions)} sont disponibles."
+        f"Trop de questions demandées, seules {len(toutesQuestions)} sont disponibles."
     # Sélection aléatoire des questions
     questions = sélectionner(nb_questions, toutesQuestions)
 else:
@@ -44,7 +44,7 @@ else:
         # Sélection du nombre de questions souhaité
         nb_questions = int(input(f'Combien de questions à {p} points souhaitez-vous ? '))
         assert nb_questions <= len(parPoints[p]),\
-               f"Trop de questions demandées, seules {len(parPoints[p])} sont disponibles."
+            f"Trop de questions demandées, seules {len(parPoints[p])} sont disponibles."
         # Sélection aléatoire des questions
         questions.extend(sélectionner(nb_questions, parPoints[p]))
     # mélange final pour éviter les successions de questions par points
