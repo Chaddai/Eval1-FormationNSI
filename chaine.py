@@ -20,7 +20,7 @@ def sousChaine(texte, début, taille):
     """
     assert 0 <= début < len(texte), "L'indice de début doit être valide"
     assert 0 <= taille <= len(texte) - début, "Vous ne pouvez extraire autant de caractères"
-    extrait = ""
+    extrait = ''
     for i in range(début, début+taille):
         extrait += texte[i]
     return extrait
@@ -104,7 +104,7 @@ def enMajuscule(texte):
     >>> enMajuscule('Ceci est un test.')
     'CECI EST UN TEST.'
     """
-    sortie = ""
+    sortie = ''
     for c in texte:
         if 'a' <= c <= 'z':
             c = chr(ord(c) + ord('A')-ord('a'))
@@ -140,7 +140,7 @@ def demanderEntierEntre(a, b, demande):
         paramètre demande : (str) La question à poser
     """
     while True:
-        try: # nécessaire pour traiter le cas où l'utilisateur n'entre pas un entier
+        try:  # nécessaire pour traiter le cas où l'utilisateur n'entre pas un entier
             n = int(input(demande))
             if a <= n <= b:
                 return n

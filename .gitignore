@@ -59,3 +59,13 @@ target/
 
 # Ignore vscode deep config
 .vscode/.ropeproject
+
+# Ignore details from LaTeX and latexmk
+*.aux
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.pdf
+
+# Specific
+correction.html

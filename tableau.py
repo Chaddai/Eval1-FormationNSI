@@ -75,7 +75,7 @@ def sélectionner(n, xs):
     >>> set(sélectionner(2, [1,2,3,4])).issubset(set([1,2,3,4]))
     True
     """
-    assert n <= len(xs), "Liste trop courte pour sélectionner "+str(n)+" éléments."
+    assert n <= len(xs), 'Liste trop courte pour sélectionner '+str(n)+' éléments.'
     ys = list(xs)
     mélanger(ys)
     return extraction(ys, 0, n)

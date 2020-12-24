@@ -7,8 +7,7 @@ from eval1 import importerQuestions
 
 toutesQuestions = importerQuestions("quizz-diu-eil.txt")
 
-# Création du dictionnaire de listes de questions
-# indexées par le nombre de points rapportés.
+# Création du dictionnaire de listes de questions indexées par le nombre de points rapportés.
 parPoints = dict()
 for question in toutesQuestions:
     _, _, p = question

@@ -1,0 +1,199 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[french]{scrartcl}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Correction de l'évaluation 1}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\hypertarget{partie-1}{%
+\subsection{Partie 1}\label{partie-1}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  On construit un tableau des ``questions'', chaque question étant
+  constitué de
+
+  \begin{itemize}
+  \tightlist
+  \item
+    la question posée,
+  \item
+    la réponse attendue
+  \item
+    et le nombre de points attribués.
+  \end{itemize}
+
+  Ainsi chaque question sera représentée par un triplet de deux chaînes
+  de caractères et d'un entier (str,str,int). Ce tableau est bien
+  homogène et sera modifié par la suite (pour permettre le mélange par
+  l'algorithme de Fisher-Yates) tandis que les questions sont immuables
+  et hétérogènes (dû à l'inclusion des points) et doivent donc être
+  représentées par un p-uplet.
+
+  Les opérations à effectuer (mélange, sélection d'une sous-liste,
+  parcours dans l'ordre) sont particulièrement adaptées à un tableau.
+\item
+  Voir le code python de la \href{partie1.py}{partie 1} ainsi que les
+  modules \href{tableau.py}{tableau} et \href{chaine.py}{chaine} qui
+  contiennent des fonctions utilitaires créées précédemment dans l'année
+  (ou rajoutées à l'occasion comme la fonction
+  \texttt{demanderEntierEntre()}).
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{partie-2}{%
+\subsection{Partie 2}\label{partie-2}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  On peut réaliser ce choix à l'aide des tableaux utilisés dans la
+  partie 1 mais cela est assez peu pratique, impliquant un parcours
+  complet de tableau pour retrouver les questions correspondant à chaque
+  nombre de points.
+
+  Il est plus pragmatique et lisible de créer un dictionnaire lors de la
+  lecture du fichier dont les clés seront le nombre de points par
+  question possibles et la valeur associée est le tableau des questions
+  rapportant ce nombre de point. Voir la \href{partie2.py}{partie 2}
+  pour la réalisation.
+\item
+  Notez que cette partie a été rédigée en supposant que l'utilisateur
+  veut toujours pouvoir choisir le nombre de questions par points.
+
+  S'il souhaite pouvoir utiliser le mode de sélection de la partie 1 de
+  temps en temps, il est préférable de garder une liste mère de toutes
+  les questions également et de lui proposer l'alternative, voir la
+  \href{partie2bis.py}{partie 2bis} pour une implémentation (notez que
+  les triplets représentant les questions sont partagés en mémoire entre
+  la liste et le dictionnaire et que l'immuabilité des tuples en Python
+  (et des str) garantit ici l'absence de bugs dus à ce partage).
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\hypertarget{partie-3}{%
+\subsection{Partie 3}\label{partie-3}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{4}
+\item
+  On aura besoin d'un dictionnaire \texttt{sansAccent} dont les clés
+  seront les lettres accentuées et les valeurs la version non-accentuée
+  de la clé.
+
+  On utilisera également un dictionnaire \texttt{soundexValeurs} pour
+  sélectionner quel traitement effectuer pour chaque lettre lors de
+  l'étape finale, avec comme clés les lettres majuscules et comme
+  valeurs leur valeur numérique selon soundex, ainsi que 0 pour celles à
+  supprimer. On reconstruira ainsi, caractère par caractère la version
+  Soundex de la chaine (qu'on suppose constituée de majuscules sans
+  accent à cette étape).
+\item
+  On notera que cette suppression des accents (et cédille) peut aussi
+  être accompli par une utilisation adéquate d'Unicode en mettant
+  d'abord sa chaîne en forme normale KD (qui décompose un caractère
+  composé en la lettre de base et un caractère dit ``combinant''
+  représentant l'accent) puis en supprimant les caractères
+  ``combinants'' (accents, cédilles, etc).
+
+  D'une façon plus basique, on peut remplacer chaque caractère par sa
+  version non-accentuée si ce caractère est une clé de
+  \texttt{sansAccent} (utilisation de l'opérateur \texttt{in} sur un
+  dictionnaire) ou en la rajoutant à l'identique sinon. Voir
+  \texttt{retirerAccent()} dans le module \href{chaine.py}{chaine}.
+\item
+  La fonction \texttt{enMajuscule()} n'a à se préoccuper que des lettres
+  minuscules sans accent, il suffit donc de remplacer chacune de ces
+  lettres par sa version majuscule en ajoutant la différence entre les
+  codes ASCII du `a' minuscule et du `A' majuscule à leur code ASCII.
+  Voir le module \href{chaine.py}{chaine}.
+\item
+  La fonction \texttt{retireDoublon()} examine chaque caractère excepté
+  le premier et ne recopie ce caractère au bout de la sortie que s'il
+  diffère du précédent. Voir le module \href{chaine.py}{chaine}.
+\item
+  Pour \texttt{codeSoundex()}, on met de côté la première lettre puis
+  l'on examine chaque lettre restante et selon sa valeur associée dans
+  \texttt{soundexValeurs}, on passe (valeur 0) ou on la remplace par sa
+  valeur (transformée en chaine par \texttt{str()}). Enfin on renvoie ma
+  concaténation de la première lettre mise de côté, et des trois
+  premiers caractères de la version traduite (à laquelle on a ajouté
+  \texttt{\textquotesingle{}000\textquotesingle{}} pour garantir qu'elle
+  contienne bien trois caractères au moins). Voir le module
+  \href{eval1.py}{eval1} pour l'implémentation.
+\end{enumerate}
+
+On peut alors reprendre la partie 2 en comparant la version Soundex des
+réponses données et attendues.
+
+\hypertarget{bonus}{%
+\subsection{Bonus}\label{bonus}}
+
+Il y a néanmoins un petit problème si vous exécutez ce code : si vous
+tombez sur la question « Quel est le nom de l'encodage qui utilise le
+code ASCII ? », la réponse « utf-8 » n'étant pas constituée entièrement
+de lettres sera mal traitée par votre fonction \texttt{codeSoundex()} :
+si vous avez négligé de vérifier qu'un caractère est bien une clé de
+votre dictionnaire avant de procéder, votre programme plantera tandis
+que si vous avez passé ces caractères sans modifications ou sans les
+recopier, la valeur renvoyée sera incorrecte (notez que le 8 dans utf-8
+est important vu l'existence de utf-16 et utf-32).
+
+Une solution propre à ce problème serait de découper le texte à traiter
+en parties constituées entièrement de lettres auxquelles on applique
+Soundex et d'autres symboles qu'on laisse passer à l'identique. C'est ce
+qui est fait dans la fonction \texttt{soundexParMot()} du module
+\href{eval1.py}{eval1} et utilisé dans la \href{partie3.py}{version
+finale du programme}.
+
+\end{document}
